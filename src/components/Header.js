@@ -6,7 +6,7 @@ import Instamart from "./Instamart";
 
 export const Title = () => (
   <a href="/">
-    <img className="logo" src={LOGO_IMG_URL} alt="Restaurant Interior" />
+    <img className="logo h-27" src={LOGO_IMG_URL} alt="Restaurant Interior" />
   </a>
 );
 
@@ -19,27 +19,27 @@ const Header = () => {
   }, [isLoggedIn]);
 
   return (
-    <div className="header">
+    <div className="header flex justify-between bg-amber-50 shadow sm:bg-blue-50">
       <Title />
-      <div className="nav-items">
-        <ul>
+      <div className="nav-items py-10">
+        <ul className="flex">
           <Link to="/">
-            <li>Home</li>
+            <li className="px-3">Home</li>
           </Link>
           <Link to="/About">
-            <li>About</li>
+            <li className="px-3">About</li>
           </Link>
           <Link to="/Contact">
             {" "}
-            <li>Contact</li>
+            <li className="px-3">Contact</li>
           </Link>
-          <li>Cart</li>
+          <li className="px-3">Cart</li>
           <Link to="/Instamart">
-            <li>Instamart</li>
+            <li className="px-3">Instamart</li>
           </Link>
         </ul>
       </div>
-      <h1>{isOnline ? "🍏" : "🍎"}</h1>
+      <h1 className="py-10">{isOnline ? "🍏" : "🍎"}</h1>
       {isLoggedIn ? (
         <button onClick={() => SetIsLoggedIn(false)}>Logout</button>
       ) : (
