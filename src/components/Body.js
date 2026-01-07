@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { RestaurantList } from "../configurations/constants";
 import RestoCard from "./RestroCard";
 import ShimmerUI from "./Shimmer";
 import { filetrData } from "../utils/helper";
 import useOnline from "../utils/useOnline";
+import userContext from "../utils/userContext";
 
 // const Body = () => {
 //   //const searchInput = "KFC";
@@ -48,6 +49,7 @@ const Body = () => {
   //   background: "ash",
   //   opocity: 0.1,
   // };
+  const { user, SetUser } = useContext(userContext);
   const [searchInput, SetsearchInput] = useState(""); // It return an array [variablename, function to update the variable]
   const [searchClicked, SetsearchClicked] = useState("false");
   useEffect(() => {
@@ -102,6 +104,28 @@ const Body = () => {
         >
           Cancel
         </button>
+        <input
+          type="text"
+          className="border-2"
+          value={user.name}
+          onChange={(e) =>
+            SetUser({
+              ...user,
+              name: e.target.value,
+            })
+          }
+        ></input>
+        <input
+          type="text"
+          className="border-2"
+          value={user.email}
+          onChange={(e) =>
+            SetUser({
+              ...user,
+              email: e.target.value,
+            })
+          }
+        ></input>
       </div>
       <div className="resto-list flex flex-wrap justify-between">
         {restaurants.map((element, i) => (

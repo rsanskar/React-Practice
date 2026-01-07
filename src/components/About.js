@@ -2,6 +2,7 @@ import Profile from "./ProfileClass";
 import ProfileFunctionalComponent from "./Profile";
 import { Link, Outlet } from "react-router-dom";
 import React from "react";
+import userContext from "../utils/userContext";
 
 // const About2 = () => {
 //     return(
@@ -12,42 +13,44 @@ import React from "react";
 //             </p>
 //             <h5>
 //                  <Outlet/>
-//                 <Link to="Profile"> click here to view profile </Link> 
+//                 <Link to="Profile"> click here to view profile </Link>
 //                 {/* <ProfileFunctionalComponent name="Ravula Sanskar"/>
 //                 <Profile name="Ravula Sanskar"/> */}
 //             </h5>
 //         </div>
 //     )
 // }
-class About extends React.Component{
-    constructor(props){
-        super(props)
-        {
-
-        }
-        console.log("Parent - Component Constructor");
+class About extends React.Component {
+  constructor(props) {
+    super(props);
+    {
     }
-    componentDidMount(){
-        console.log("Parent - Component Did Mount");
-    }
-    render(){
-        console.log("Parent - Component Render");
-        return(
-        <div>
-            <h1>About Us Page</h1>
-            <p>
-                This is a about us page - Finding the path
-            </p>
-            <h5>
-                 <Outlet/>
-                {/* <Link to="Profile"> click here to view profile </Link>  */}
-                {/* {<ProfileFunctionalComponent name="Ravula Sanskar"/>}                 */}
-                <Profile name="First Child"/> 
-                {/* {<Profile name="Second Child"/>}  */}
-            </h5>
-        </div>
-        )
-    }
+    console.log("Parent - Component Constructor");
+  }
+  componentDidMount() {
+    console.log("Parent - Component Did Mount");
+  }
+  render() {
+    console.log("Parent - Component Render");
+    return (
+      <div>
+        <h1>About Us Page</h1>
+        <p>This is a about us page - Finding the path</p>
+        <userContext.Consumer>
+          {({ user }) => (
+            <p className="text-3xl font-bold">{user.name + " " + user.email}</p>
+          )}
+        </userContext.Consumer>
+        <h5>
+          <Outlet />
+          {/* <Link to="Profile"> click here to view profile </Link>  */}
+          {/* {<ProfileFunctionalComponent name="Ravula Sanskar"/>}                 */}
+          <Profile name="First Child" />
+          {/* {<Profile name="Second Child"/>}  */}
+        </h5>
+      </div>
+    );
+  }
 }
 
 export default About;

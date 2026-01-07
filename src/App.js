@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useState } from "react";
 import ReactDOM from "react-dom/client";
 import Body from "./components/Body";
 import Footer from "./components/Footer";
@@ -17,7 +17,8 @@ import { Title } from "./components/Header";
 import About from "./components/About";
 import ContactClassBasedComponent from "./components/ContactClassBasedComponent";
 import ShimmerUI from "./components/Shimmer";
-
+import Instamart1 from "./components/Instamart1";
+import userContext from "./utils/userContext";
 const Instamart = lazy(() => import("./components/Instamart"));
 /*
     Header
@@ -74,12 +75,18 @@ const Instamart = lazy(() => import("./components/Instamart"));
 // }
 
 const AppLayout = () => {
+  const [user, SetUser] = useState({
+    name: "Modified Name",
+    email: "Modified Email",
+  });
   return (
-    <React.Fragment>
-      <Header />
-      <Outlet />
-      <Footer />
-    </React.Fragment>
+    <userContext.Provider value={{ user: user, SetUser: SetUser }}>
+      <React.Fragment>
+        <Header />
+        <Outlet />
+        <Footer />
+      </React.Fragment>
+    </userContext.Provider>
   );
 };
 
@@ -126,6 +133,14 @@ const appRouter = createBrowserRouter([
         element: (
           <Suspense fallback={<ShimmerUI />}>
             <Instamart />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/Instamart1",
+        element: (
+          <Suspense fallback={<ShimmerUI />}>
+            <Instamart1 />
           </Suspense>
         ),
       },

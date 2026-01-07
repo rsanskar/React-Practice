@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { LOGO_IMG_URL } from "../configurations/constants";
 import { Link } from "react-router-dom";
 import useOnline from "../utils/useOnline";
 import Instamart from "./Instamart";
+import Instamart1 from "./Instamart1";
+import userContext from "../utils/userContext";
 
 export const Title = () => (
   <a href="/">
@@ -13,6 +15,7 @@ export const Title = () => (
 const Header = () => {
   const [isLoggedIn, SetIsLoggedIn] = useState(false);
   const isOnline = useOnline();
+  const { user } = useContext(userContext);
   //console.log("render")
   useEffect(() => {
     //console.log("This is use effect")
@@ -37,9 +40,13 @@ const Header = () => {
           <Link to="/Instamart">
             <li className="px-3">Instamart</li>
           </Link>
+          <Link to="/Instamart1">
+            <li className="px-3">Instamart1</li>
+          </Link>
         </ul>
       </div>
       <h1 className="py-10">{isOnline ? "🍏" : "🍎"}</h1>
+      <h1 className="py-10">{user.name}</h1>
       {isLoggedIn ? (
         <button onClick={() => SetIsLoggedIn(false)}>Logout</button>
       ) : (
