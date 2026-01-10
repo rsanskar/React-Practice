@@ -20,6 +20,8 @@ import ShimmerUI from "./components/Shimmer";
 import Instamart1 from "./components/Instamart1";
 import userContext from "./utils/userContext";
 const Instamart = lazy(() => import("./components/Instamart"));
+import { Provider } from "react-redux";
+import store from "./utils/store";
 /*
     Header
         -Logo
@@ -80,13 +82,15 @@ const AppLayout = () => {
     email: "Modified Email",
   });
   return (
-    <userContext.Provider value={{ user: user, SetUser: SetUser }}>
-      <React.Fragment>
-        <Header />
-        <Outlet />
-        <Footer />
-      </React.Fragment>
-    </userContext.Provider>
+    <Provider store={store}>
+      <userContext.Provider value={{ user: user, SetUser: SetUser }}>
+        <React.Fragment>
+          <Header />
+          <Outlet />
+          <Footer />
+        </React.Fragment>
+      </userContext.Provider>
+    </Provider>
   );
 };
 

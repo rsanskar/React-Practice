@@ -5,6 +5,7 @@ import useOnline from "../utils/useOnline";
 import Instamart from "./Instamart";
 import Instamart1 from "./Instamart1";
 import userContext from "../utils/userContext";
+import { useSelector } from "react-redux";
 
 export const Title = () => (
   <a href="/">
@@ -16,6 +17,7 @@ const Header = () => {
   const [isLoggedIn, SetIsLoggedIn] = useState(false);
   const isOnline = useOnline();
   const { user } = useContext(userContext);
+  const cartItems = useSelector((store) => store.cart.items);
   //console.log("render")
   useEffect(() => {
     //console.log("This is use effect")
@@ -36,13 +38,13 @@ const Header = () => {
             {" "}
             <li className="px-3">Contact</li>
           </Link>
-          <li className="px-3">Cart</li>
           <Link to="/Instamart">
             <li className="px-3">Instamart</li>
           </Link>
           <Link to="/Instamart1">
             <li className="px-3">Instamart1</li>
           </Link>
+          <li className="px-3">Cart- {cartItems.length} items</li>
         </ul>
       </div>
       <h1 className="py-10">{isOnline ? "🍏" : "🍎"}</h1>
