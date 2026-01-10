@@ -22,6 +22,7 @@ import userContext from "./utils/userContext";
 const Instamart = lazy(() => import("./components/Instamart"));
 import { Provider } from "react-redux";
 import store from "./utils/store";
+import Cart from "./components/cart";
 /*
     Header
         -Logo
@@ -147,6 +148,10 @@ const appRouter = createBrowserRouter([
             <Instamart1 />
           </Suspense>
         ),
+      },
+      {
+        path: "/Cart",
+        element: <Cart />,
       },
     ],
   },

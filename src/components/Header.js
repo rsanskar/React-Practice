@@ -18,6 +18,7 @@ const Header = () => {
   const isOnline = useOnline();
   const { user } = useContext(userContext);
   const cartItems = useSelector((store) => store.cart.items);
+  console.log(cartItems);
   //console.log("render")
   useEffect(() => {
     //console.log("This is use effect")
@@ -44,7 +45,9 @@ const Header = () => {
           <Link to="/Instamart1">
             <li className="px-3">Instamart1</li>
           </Link>
-          <li className="px-3">Cart- {cartItems.length} items</li>
+          <Link to="/Cart">
+            <li className="px-3">Cart- {cartItems.length} items</li>
+          </Link>
         </ul>
       </div>
       <h1 className="py-10">{isOnline ? "🍏" : "🍎"}</h1>
